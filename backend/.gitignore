@@ -1,0 +1,16 @@
+# General
+*.log
+.DS_Store
+.project
+.vagrant
+.strong-pm
+*/node_modules
+*/logs
+*/npm-debug.log
+*/.env
+node_modules
+*/tmp/*
+
+# Api
+./backend/node_modules/*
+./backend/tmp/*
