@@ -4,12 +4,11 @@
 const Hapi = require('hapi');
 const Path = require('path');
 const Glob = require('glob');
-const Mongoose = require('mongoose');
-
+const Config = require('./config/config.js');
 
 // HapiJS configuration
 const server = Hapi.Server({
-  port: 9000,
+  port: Config.api.port,
   routes: { 
     cors: true, 
     jsonp: 'callback' 
@@ -18,6 +17,9 @@ const server = Hapi.Server({
 
 // INIT
 const boot = async () => {
+
+  // Import database
+  require('./config/database');
 
   // Development configuration
   if (process.env.NODE_ENV === 'development') {
@@ -59,16 +61,9 @@ const boot = async () => {
 
   try {
     await server.start();
-    // Once started, connect to Mongo through Mongoose
-    Mongoose.connect('mongodb://mongodb:27017/dev_env', {}).then(() => {
-      console.log(`Connected to Mongo server`)
-      console.log(`Server running at: ${server.info.uri}`);
-    }, err => {
-      console.log(err)
-    });
   }
   catch (err) {
-    console.log(err)
+    console.log(err);
   }
 
 

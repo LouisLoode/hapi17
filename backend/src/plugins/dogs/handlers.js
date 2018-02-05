@@ -65,8 +65,6 @@ class DogController {
     });
     return dog.save().then((product, err) => {
       if (err) return Boom.badRequest(err)
-      console.log('err  ', err);
-      console.log('dog', dog);
       return { message: 'Dog data updated successfully', dog: dog };
     });
   }
